@@ -29,5 +29,18 @@ export function selectedCar(car) {
 
 
 export function createCar(body) {
+  //dont know what to put as a key in the fetch
+const request = fetch('${BASE_URL}?key={API_KEY}', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify(body)
+
+}).then(response => response.json())
+  .then(callback);
+
+return {
+  type: CAR_CREATED,
+  payload: request
+};
 
 }
