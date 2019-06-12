@@ -22,6 +22,10 @@ const plate = value =>
 value && !^[A-Z0-9]{3}(?:List)?$.test(value) ?
 'invalida plate' : undefined
 
+//warning for the car model
+const modelWarning = value =>
+value && value < 7 ? 'That is not a valid name' : undefined
+
 //validation for the brand car name
 const tooShort = value =>
 value && value < 3 ? 'Make sure you are using the correct name' : undefined
@@ -69,7 +73,7 @@ handleSubmit = (event) => {
          <Field name="model" type="text"
         component={renderField} label="Model"
         validate={required,minValue10} // comming form line16-18
-        //warn={aol}
+        warn={modelWarning}
         />
 
          <Field name="Brand" type="text"
