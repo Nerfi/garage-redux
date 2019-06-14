@@ -55,6 +55,9 @@ ReactDOM.render(
 
       <Route path="/cars/new" exact component={CarsNew} />
 
+      <Route path="/cars/show" exact component={CarShow} />
+
+
       </Switch>
     </Router>
   </Provider>,

@@ -44,3 +44,16 @@ return {
 };
 
 }
+
+//delete a car
+export function deleteCar(callback){
+const request = fetch('${BASE_URL}?key=${API_KEY}', {
+
+}).then(response => response.json())
+  .then(callback);
+ return {
+  type: DELETE_CAR,
+  payload: request
+
+ };
+}
