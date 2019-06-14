@@ -14,7 +14,7 @@ export function fetchCars (car) {
 const url = '${BASE_URL}/${car}/cars';
 const promise = fetch(url).then(r => r.json());
   return {
-    type: FETCH_CARS,
+    type: FETCH_CARS, // dont forget to add comillas SIEMPRE
     payload: promise
   };
 }
@@ -56,4 +56,53 @@ const request = fetch('${BASE_URL}?key=${API_KEY}', {
   payload: request
 
  };
+}
+
+
+//lewagon solution
+const BASE_URL = 'https://wagon-garage-api.herokuapp.com';
+
+export function fetchCars(garage) {
+  const url = `${BASE_URL}/${garage}/cars`;
+  const promise = fetch(url)
+  .then(r => r.json());
+
+  return {
+    type: 'FETCH_CARS',
+    payload: promise // will be resolved by redux-prmoise
+  };
+}
+
+
+export function removeCar(history, car) {
+const url = `${BASE_URL}/cars/${car.id}`;
+fetch(url, { method: 'DELETE'})
+.then(r => r.json())
+.then(() => history.push(""));
+
+  return {
+    type: 'REMOVE_CAR',
+    payload: car
+  };
+
+
+}
+
+
+export function addCar(garage, car, callback) {
+  const url =  `${BASE_URL}/${garage}/cars`;
+  const request = fetch(url, {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(car)
+  }).then(r => r.json())
+  .then(() => callback());
+
+  return {
+    type_ 'ADD_CAR',
+    payload: request // will be resolved by redux-promise
+  };
 }

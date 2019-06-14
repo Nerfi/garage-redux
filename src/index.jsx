@@ -9,9 +9,18 @@ import { createHistory as history } from 'history';
 
 import '../assets/stylesheets/application.scss';
 
-//importing reducers
+//lewagon solution importing containers to render them
+// on the app
+import CarsIndex from './containers/cars_index';
+import CarShow from './containers/cars_show';
+import CarsNew from './containers/cars_new';
+import '../assets/stylesheets/application.scss';
 
+
+//importing reducers
+// why on lewagon they dont import garageReducer ?
 import garageReducer from './reducers/garage_reducer';
+
 import carsReducer from './reducers/cars_reducer';
 
 //importing the form
@@ -39,7 +48,10 @@ cars: [
 const store = createStore(reducers, initialState, middlewares);
 
 const reducers = combineReducers({
- garage: garageReducer,
+ //lewagon solution
+ //always initialize the state
+ garage: (state = null, action) => state,
+ //garage: garageReducer,
  cars: carsReducer
  form: formReducer // idk if it's ok
 });
@@ -50,15 +62,20 @@ const middlewares = applyMiddleware(reduxPromise, logger);
 ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
+     <div className="view-container">
+
       <Switch>
       <Route path="/" exact component={CarsIndex} />
 
       <Route path="/cars/new" exact component={CarsNew} />
 
-      <Route path="/cars/show" exact component={CarShow} />
+      <//Route path="/cars/show" exact component={CarShow} />
+      <Route path="/cars/:id" exact component={CarShow} />
 
 
-      </Switch>
+       </Switch>
+      </div>
+
     </Router>
   </Provider>,
   document.getElementById('root')
